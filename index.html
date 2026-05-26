@@ -85,16 +85,24 @@
             align-items: center;
             background: radial-gradient(circle at 50% 0%, rgba(255, 107, 0, 0.08) 0%, var(--bg-main) 60%);
             border-bottom: 1px solid var(--border);
+            padding: 4rem 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
             margin-bottom: 1.5rem;
             color: var(--text-main);
         }
 
         .hero h2 {
-            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-size: clamp(1.1rem, 1.8vw, 1.6rem);
             font-weight: 400;
             color: var(--text-muted);
             max-width: 800px;
@@ -104,6 +112,45 @@
         .hero .highlight {
             color: var(--accent);
             font-weight: 600;
+        }
+
+        /* Hero Image Container Styling */
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            z-index: -1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .hero-stats {
@@ -259,9 +306,30 @@
         }
 
         /* Responsive */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            .hero-image-wrapper {
+                order: -1; /* Puts image above text on smaller tablets/mobile */
+                margin-bottom: 1rem;
+            }
+            .hero-image-container::before {
+                display: none; /* Simplifies layout on smaller viewports */
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            div[style*="display: flex; gap: 1rem;"] {
+                justify-content: center;
+            }
+        }
+
         @media (max-width: 768px) {
             .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
-            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; text-align: center; }
             section { padding: 4rem 0; }
         }
     </style>
@@ -270,28 +338,38 @@
 
     <section class="hero fade-in">
         <div class="container">
-            <span class="section-tag">Deep-Tech Commercialisation</span>
-            <h1>Paul Schelhaas</h1>
-            <h2>Serial Technical Entrepreneur, Inventor, and Commercialisation Advisor. 
-                <br>I don't advise on innovation,<span class="highlight"> I have repeatedly delivered it.</span></h2>
-            
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#contact" class="btn">Engage My Services</a>
-                <a href="#track-record" class="btn btn-outline">View Track Record</a>
-            </div>
+            <div class="hero-grid">
+                <div>
+                    <span class="section-tag">Deep-Tech Commercialisation</span>
+                    <h1>Paul Schelhaas</h1>
+                    <h2>Serial Technical Entrepreneur, Inventor, and Commercialisation Advisor. 
+                        <br>I don't advise on innovation,<span class="highlight"> I have repeatedly delivered it.</span></h2>
+                    
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="#contact" class="btn">Engage My Services</a>
+                        <a href="#track-record" class="btn btn-outline">View Track Record</a>
+                    </div>
 
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-num">14</span>
-                    <span class="stat-label">Years as Tech CEO</span>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-num">14</span>
+                            <span class="stat-label">Years as Tech CEO</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num">B2B</span>
+                            <span class="stat-label">Supermajor Deal Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num">IP</span>
+                            <span class="stat-label">Multi-Patent Inventor</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <span class="stat-num">B2B</span>
-                    <span class="stat-label">Supermajor Deal Experience</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-num">IP</span>
-                    <span class="stat-label">Multi-Patent Inventor</span>
+
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-container">
+                        <img src="psheadshot.jpeg" alt="Paul Schelhaas" class="hero-image" loading="eager">
+                    </div>
                 </div>
             </div>
         </div>
